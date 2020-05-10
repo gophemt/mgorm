@@ -17,7 +17,7 @@ type ReadOne struct {
 // Exec exeuate data from read struct
 func (m *ReadOne) Exec(mgo *mongo.Client) error {
 
-	collection := mgo.Database(m.DatabaseName).Collection(m.CollectionName)
+	collection := mgo.Database(m.Name).Collection(m.Collection)
 	documentReturned := collection.FindOne(context.TODO(), m.Filter)
 
 	var err error

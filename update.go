@@ -18,7 +18,7 @@ type UpdateOne struct {
 // Exec update one entry
 func (u *UpdateOne) Exec(mgo *mongo.Client) error {
 
-	collection := mgo.Database(u.DatabaseName).Collection(u.CollectionName)
+	collection := mgo.Database(u.Name).Collection(u.Collection)
 	atualizacao := bson.D{{Key: "$set", Value: u.Data}}
 	updatedResult, err := collection.UpdateOne(context.TODO(), u.Filter, atualizacao)
 	if err != nil {

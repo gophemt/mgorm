@@ -17,7 +17,7 @@ type Remove struct {
 // Exec remove type
 func (r *Remove) Exec(mgo *mongo.Client) error {
 
-	collection := mgo.Database(r.DatabaseName).Collection(r.CollectionName)
+	collection := mgo.Database(r.Name).Collection(r.Collection)
 	deleteResult, err := collection.DeleteOne(context.TODO(), r.Filter)
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ type Read struct {
 // Exec exeuate data from read struct
 func (m *Read) Exec(mgo *mongo.Client) error {
 
-	collection := mgo.Database(m.DatabaseName).Collection(m.CollectionName)
+	collection := mgo.Database(m.Name).Collection(m.Collection)
 	cur, err := collection.Find(context.TODO(), m.Filter)
 	if err != nil {
 		return err

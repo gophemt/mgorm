@@ -16,7 +16,7 @@ type InsertOne struct {
 // Exec insertone
 func (i *InsertOne) Exec(mgo *mongo.Client) error {
 
-	collection := mgo.Database(i.DatabaseName).Collection(i.CollectionName)
+	collection := mgo.Database(i.Name).Collection(i.Collection)
 	insertResult, err := collection.InsertOne(context.TODO(), i.Data)
 	if err != nil {
 		return err

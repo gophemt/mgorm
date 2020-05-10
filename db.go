@@ -10,8 +10,8 @@ import (
 
 // Db structure is parent of all struct in mgorm
 type Db struct {
-	DatabaseName   string
-	CollectionName string
+	Name       string
+	Collection string
 }
 
 // Decoder decode on types
