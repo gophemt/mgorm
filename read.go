@@ -15,7 +15,7 @@ type Read struct {
 	Result []interface{}
 }
 
-// Exec exeuate data from read struct
+// Exec execute data from read struct
 func (m *Read) Exec(mgo *mongo.Client) error {
 
 	collection := mgo.Database(m.Name).Collection(m.Collection)
