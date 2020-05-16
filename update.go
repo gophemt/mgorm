@@ -15,14 +15,24 @@ type UpdateOne struct {
 	Filter bson.M
 	Count  int64
 	Opts   *options.UpdateOptions
+	Type   string
 }
 
 // Exec update one entry
 func (u *UpdateOne) Exec(mgo *mongo.Client) error {
 
 	collection := mgo.Database(u.Name).Collection(u.Collection)
-	atualizacao := bson.D{{Key: "$set", Value: u.Data}}
-	updatedResult, err := collection.UpdateOne(context.TODO(), u.Filter, atualizacao, u.Opts)
+	data := bson.D{}
+	switch u.Type {
+	case "set":
+		data = bson.D{{Key: "$set", Value: u.Data}}
+	case "inc":
+		data = bson.D{{Key: "$inc", Value: u.Data}}
+	default:
+		data = bson.D{{Key: "$set", Value: u.Data}}
+	}
+
+	updatedResult, err := collection.UpdateOne(context.TODO(), u.Filter, data, u.Opts)
 	if err != nil {
 		return err
 	}
